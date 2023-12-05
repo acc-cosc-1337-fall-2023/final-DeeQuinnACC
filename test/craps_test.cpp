@@ -27,3 +27,18 @@ TEST_CASE("Test if Die::roll() generates a value between 1 and 6")
 	}
 	
 }
+
+TEST_CASE("Test if Roll::roll_dice() generates a value between 2 and 12")
+{
+	std::srand(time(NULL));
+	Die d1, d2;
+	Roll r(d1, d2);
+	for(int i=0; i<10; i++)
+	{
+		r.roll_dice();
+		int roll = r.roll_value();
+		REQUIRE(roll > 1);
+		REQUIRE(roll < 13);
+	}
+	
+}
