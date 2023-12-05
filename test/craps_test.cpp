@@ -40,5 +40,20 @@ TEST_CASE("Test if Roll::roll_dice() generates a value between 2 and 12")
 		REQUIRE(roll > 1);
 		REQUIRE(roll < 13);
 	}
-	
+}
+
+TEST_CASE("Test that Shooter::shoot_dice()'s Roll generates a value between 2 and 12")
+{
+	std::srand(time(NULL));
+	Shooter s;
+	for(int i=0; i<10; i++)
+	{
+		Die d1, d2;
+		int roll = s.throw_dice(d1, d2)->roll_value();
+		REQUIRE(roll > 1);
+		REQUIRE(roll < 13);
+	}
+
+	//Check Shooter << overload manually
+	std::cout<<s<<"\n";
 }
