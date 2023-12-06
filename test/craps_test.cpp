@@ -53,7 +53,89 @@ TEST_CASE("Test that Shooter::shoot_dice()'s Roll generates a value between 2 an
 		REQUIRE(roll > 1);
 		REQUIRE(roll < 13);
 	}
+}
 
-	//Check Shooter << overload manually
-	std::cout<<s<<"\n";
+TEST_CASE("Test ComeOutPhase::get_outcome() returns the correct RollOutcome")
+{
+	
+	Die d1, d2;
+	Roll* r = new Roll(d1, d2);
+	ComeOutPhase coPhase;
+
+	while(r->roll_value() != 7)
+	{
+		r->roll_dice();
+	}
+
+	REQUIRE(coPhase.get_outcome(r) == RollOutcome::natural);
+
+	while(r->roll_value() != 11)
+	{
+		r->roll_dice();
+	}
+
+	REQUIRE(coPhase.get_outcome(r) == RollOutcome::natural);
+	
+	while(r->roll_value() != 2)
+	{
+		r->roll_dice();
+	}
+
+	REQUIRE(coPhase.get_outcome(r) == RollOutcome::craps);
+	
+	while(r->roll_value() != 3)
+	{
+		r->roll_dice();
+	}
+
+	REQUIRE(coPhase.get_outcome(r) == RollOutcome::craps);
+	
+	while(r->roll_value() != 12)
+	{
+		r->roll_dice();
+	}
+
+	REQUIRE(coPhase.get_outcome(r) == RollOutcome::craps);
+
+
+	//Program might get stuck here
+	while(r->roll_value() == 2 || r->roll_value() == 3 || r->roll_value() == 7
+		|| r->roll_value() == 11 || r->roll_value() == 12)
+	{
+		r->roll_dice();
+	}
+
+	REQUIRE(coPhase.get_outcome(r) == RollOutcome::point);
+
+	delete r;
+}
+
+TEST_CASE("Test PointPhase::get_outcome() returns the correct RollOutcome")
+{
+	Die d1, d2;
+	Roll* r = new Roll(d1, d2);
+	PointPhase pPhase{6};
+
+	while(r->roll_value() != 6)
+	{
+		r->roll_dice();
+	}
+
+	REQUIRE(pPhase.get_outcome(r) == RollOutcome::point);
+
+	while(r->roll_value() != 7)
+	{
+		r->roll_dice();
+	}
+
+	REQUIRE(pPhase.get_outcome(r) == RollOutcome::seven_out);
+	
+	while(r->roll_value() == 6 || r->roll_value() == 7)
+	{
+		r->roll_dice();
+	}
+
+	REQUIRE(pPhase.get_outcome(r) == RollOutcome::nopoint);
+
+	delete r;
 }
