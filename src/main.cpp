@@ -25,17 +25,7 @@ int main()
 	//Roll while dice result is Natural or Craps, 
 	while(come_out_phase.get_outcome(roll) == RollOutcome::natural || come_out_phase.get_outcome(roll) == RollOutcome::craps)
 	{
-		cout<<"Rolled value: "<<roll->roll_value();
-		if(come_out_phase.get_outcome(roll) == RollOutcome::natural)
-		{
-			cout<<". Natural rolled!";
-		}
-		else
-		{
-			cout<<". Craps rolled!";
-		}
-
-		cout<<" Rolling again...\n";
+		cout<<"Rolled value: "<<roll->roll_value()<<". Rolling again...\n";
 		roll = shooter.throw_dice(die1, die2);
 	}
 	//Start of point phase
