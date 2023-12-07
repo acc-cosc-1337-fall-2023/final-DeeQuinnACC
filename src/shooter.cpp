@@ -20,7 +20,7 @@ Roll* Shooter::throw_dice(Die& d1, Die& d2)
 
 std::ostream& operator <<(std::ostream& out, Shooter& s)
 {
-    out<<"All Rolls: ";
+    out<<"All rolls this game: ";
     for(int i=0; i<s.rolls.size(); i++)
     {
         //Puts a comma after the first roll, but not after the last
