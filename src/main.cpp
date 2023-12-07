@@ -65,5 +65,6 @@ int main()
 	}
 	cout<<"\nEnd of point phase.\n";
 	cout<<shooter<<"\n";
+	
 	return 0;
 }

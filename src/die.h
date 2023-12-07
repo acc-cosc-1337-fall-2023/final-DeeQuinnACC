@@ -1,4 +1,3 @@
-//
 #include <stdlib.h>
 
 #ifndef DIE_H

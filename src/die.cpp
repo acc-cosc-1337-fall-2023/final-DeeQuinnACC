@@ -1,4 +1,3 @@
-//
 #include "die.h"
 
 void Die::roll()
